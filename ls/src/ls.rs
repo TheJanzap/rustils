@@ -7,7 +7,6 @@ use std::{
     process,
 };
 
-
 fn get_args() -> ArgMatches {
     command!()
         .arg(arg!([PATH]).default_value("."))
@@ -38,7 +37,10 @@ fn print_metadata(entry: &fs::DirEntry) {
 
     let permissions = match metadata::parse_permissions(metadata.permissions()) {
         Ok(v) => v,
-        Err(e) => { eprintln!("{e}"); process::exit(-3) }
+        Err(e) => {
+            eprintln!("{e}");
+            process::exit(-3)
+        }
     };
 
     print!("{permissions}\t");
